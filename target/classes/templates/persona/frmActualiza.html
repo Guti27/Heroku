@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', sans-serif; font-size: 150%;">Actualizar
+			datos de persona</div>
+		<hr style="background-color: #FA251B" />
+		<div>
+			<form th:action="@{/ppersons/update}" method="post" th:object="${pe}">
+
+				<div class="col-sm-12">
+					<label class="form-label">ID:</label> <input type="text"
+						th:field="*{idPerson}" class="form-control" readonly="readonly"></input>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">DNI:</label> <input type="text"
+						maxlength="8" th:field="*{dniPerson}" class="form-control"
+						readonly="readonly" placeholder="Ingrese su DNI"></input> <small
+						th:errorclass="'form-control alert-danger'"
+						th:if="${#fields.hasErrors('dniPerson')}" th:errors="*{dniPerson}"></small>
+				</div>
+				<div th:if="${mensaje}" class="alert alert-danger">
+					<p th:text="${mensaje}"></p>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Nombres:</label> <input type="text"
+						th:field="*{namePerson}" class="form-control"
+						placeholder="Ingrese su nombre"></input><small
+						th:errorclass="'form-control alert-danger'"
+						th:if="${#fields.hasErrors('namePerson')}"
+						th:errors="*{namePerson}"></small>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Apellidos:</label> <input type="text"
+						th:field="*{lastNamePerson}" class="form-control"
+						placeholder="Ingrese su apellido"></input> <small
+						th:errorclass="'form-control alert-danger'"
+						th:if="${#fields.hasErrors('lastNamePerson')}"
+						th:errors="*{lastNamePerson}"></small>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Correo:</label> <input type="email"
+						pattern=".+@[a-zA-Z0-9.-]+[.]+(.+)" th:field="*{emailPerson}"
+						class="form-control" readonly="readonly"
+						placeholder="Ingrese su correo"></input> <small
+						th:errorclass="'form-control alert-danger'"
+						th:if="${#fields.hasErrors('emailPerson')}"
+						th:errors="*{emailPerson}"></small>
+				</div>
+				<div th:if="${mensaje1}" class="alert alert-danger">
+					<p th:text="${mensaje1}"></p>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Fecha de nacimiento:</label> <input
+						type="date" th:field="*{birthDatePerson}" min="1930-01-01"
+						max="2004-06-29" class="form-control"></input>
+					<div th:object="${pe}" th:remove="tag">
+						<ul th:if="${#fields.hasErrors('birthDatePerson')}"
+							class="alert alert-danger" role="alert">
+							<li th:each="error : ${#fields.errors('birthDatePerson')}"
+								th:text="${error}"></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Teléfono:</label> <input type="text"
+						maxlength="9" th:field="*{phonePerson}" class="form-control"
+						placeholder="Ingrese su teléfono"></input> <small
+						th:errorclass="'form-control alert-danger'"
+						th:if="${#fields.hasErrors('phonePerson')}"
+						th:errors="*{phonePerson}"></small>
+				</div>
+
+				<div class="col-sm-12">
+					<input type="submit" value="Actualizar" class="btn btn-dark"></input><a
+						href="/ppersons/list" class="btn btn-danger"><span>Cancelar</span></a>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

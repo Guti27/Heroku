@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', sans-serif; font-size: 150%;">Lista
+			de trabajadores</div>
+		<hr style="background-color: #FA251B" />
+		<div>
+			<div class="table-responsive">
+				<table class="table table-white">
+					<thead>
+						<tr>
+
+							<th>ID</th>
+							<th>DNI Persona</th>
+							<th>Nombre</th>
+							<th>ID Tipo Trabajo</th>
+							<th>Tipo trabajo</th>
+							<th>Operación</th>
+							<th>Operación</th>
+
+
+
+						</tr>
+					</thead>
+					<tbody id="trabajadores-list">
+						<tr th:each="tra:${listaTrabajador}">
+							<td th:text="${tra.idTrabajador}"></td>
+							<td th:text="${tra.person.dniPerson}"></td>
+							<td th:text="${tra.person.namePerson}"></td>
+							<td th:text="${tra.tipoTrabajo.idTipoTrabajo}"></td>
+							<td th:text="${tra.tipoTrabajo.rubro}"></td>
+
+							<td><a
+								th:href="@{'/ttrabajador/goupdate/'+${tra.idTrabajador}}">
+									Actualizar </a></td>
+
+							<td><a
+								th:href="@{/ttrabajador/delete?id=}+${tra.idTrabajador}">
+									Eliminar </a></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

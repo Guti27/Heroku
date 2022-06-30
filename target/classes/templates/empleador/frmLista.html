@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', sans-serif; font-size: 150%;">Lista de empleadores</div>
+		<hr style="background-color: #FA251B" />
+		<div>
+			<div class="table-responsive">
+				<table class="table table-white">
+					<thead>
+						<tr>
+
+							<th>ID</th>
+							<th>DNI empleador</th>
+							<th>Nombre empleador</th>
+							<th>Operación</th>
+							<th>Operación</th>
+
+
+						</tr>
+					</thead>
+					<tbody id="empleador-list">
+						<tr th:each="em:${listaEmpleador}">
+							<td th:text="${em.idEmpleador}"></td>
+							<td th:text="${em.person.dniPerson}"></td>
+							<td th:text="${em.person.namePerson}"></td>
+
+
+							<td><a
+								th:href="@{'/eempleador/goupdate/'+${em.idEmpleador}}">
+									Actualizar </a></td>
+
+							<td><a th:href="@{/eempleador/delete?id=}+${em.idEmpleador}">
+									Eliminar </a></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

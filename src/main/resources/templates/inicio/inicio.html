@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="master/master :: head">
+<style>
+#selector {
+	color: red;
+}
+
+#center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+}
+</style>
+<meta charset="UTF-8">
+<title>EASYCHAMBA</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+<body>
+
+	<header th:replace="master/master :: header"></header>
+
+	<div class="container" align="center">
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="color: #FA251B; font-family: 'Roboto Condensed', sans-serif; font-size: 300%; width: 260px; margin: 0 auto;">BIENVENIDO</div>
+		<hr style="background-color: #FA251B" />
+
+		<div
+			style="font-family: 'Roboto Condensed', sans-serif; font-size: 200%; margin: 10 auto;">¡Nunca
+			fue tan fácil encontrar trabajo al dar un click!</div>
+		<br></br>
+	</div>
+	<div style="text-align: center;">
+		<img th:src="@{/img/chambainicio.jpg}" width=50% height=50% />
+	</div>
+
+</body>
+</html>

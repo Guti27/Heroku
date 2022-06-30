@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+#selector {
+	color: goldenrod;
+}
+</style>
+<body>
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', sans-serif; font-size: 150%;">Lista
+			de comentarios</div>
+		<hr style="background-color: #FA251B" />
+		<div>
+			<div class="table-responsive">
+				<table class="table table-white">
+					<thead>
+						<tr>
+
+							<th>ID</th>
+							<th>ID Contrato</th>
+							<th>DNI Empleador</th>
+							<th>Comentario</th>
+							<th>Calificación</th>
+
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Operación</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Operación</th>
+
+						</tr>
+					</thead>
+					<tbody id="comentario-list">
+						<tr th:each="co:${listaComentario}">
+							<td th:text="${co.idComentario}"></td>
+							<td th:text="${co.contrato.idContrato}"></td>
+							<td th:text="${co.empleador.person.dniPerson}"></td>
+							<td th:text="${co.addComentario}"></td>
+							<td th:text="${co.addCalificacion}" id="selector"></td>
+
+							<td><a sec:authorize="hasRole('ROLE_ADMIN')"
+								th:href="@{'/ccomentario/goupdate/'+${co.idComentario}}">
+									Actualizar </a></td>
+
+							<td><a sec:authorize="hasRole('ROLE_ADMIN')"
+								th:href="@{/ccomentario/delete?id=}+${co.idComentario}">
+									Eliminar </a></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

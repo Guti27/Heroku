@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleag.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+<meta charset="UTF-8">
+<title>SI63</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+
+	<header th:fragment="header">
+		<nav class="navbar navbar-dark bg-info">
+			<div class="container-fluid">
+				<a style="color: #FF4500" class="navbar-brand" th:href="@{/ppersons/inicio}">EASY CHAMBA</a>
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+					aria-controls="navbarNavDropdown" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNavDropdown">
+					<ul class="navbar-nav">
+
+						<li sec:authorize="hasRole('ROLE_ADMIN')"
+							class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd">Usuario</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/usuarios/nuevo}">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/usuarios/listar}">Listar</a></li>
+							</ul></li>
+
+						<li sec:authorize="hasRole('ROLE_ADMIN')"
+							class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd">Rol</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/roles/nuevo}">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/roles/listar}">Listar</a></li>
+							</ul></li>
+
+						<li
+							sec:authorize="hasRole('ROLE_TRABAJADOR') or hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADOR')"
+							class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"> Persona</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/ppersons/new}">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/ppersons/list}">Listar</a></li>
+								</sec:authorize>
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd">Tipo Trabajo</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item"
+									sec:authorize="hasRole('ROLE_ADMIN')"
+									th:href="@{/ttipotrabajo/new}">Registrar</a></li>
+								<li><a
+									sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR') or hasRole('ROLE_EMPLEADOR')"
+									class="dropdown-item" th:href="@{/ttipotrabajo/list}">Listar</a></li>
+
+							</ul></li>
+
+						<li
+							sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR')"
+							class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd">Trabajador</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/ttrabajador/new}">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/ttrabajador/list}">Listar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/ttrabajador/reporte}">Reporte</a></li>
+
+
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							sec:authorize="hasRole('ROLE_ADMIN')"
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd">Empleador</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item" th:href="@{/eempleador/new}">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/eempleador/list}">Listar</a></li>
+
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd">Aviso Trabajo</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a class="dropdown-item"
+									sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADOR')"
+									th:href="@{/aavisoTrabajo/new}">Registrar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/aavisoTrabajo/list}">Listar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/aavisoTrabajo/reporte}">Reporte</a></li>
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd">Postulante</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a
+									sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR')"
+									class="dropdown-item" th:href="@{/ppostulante/new}">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/ppostulante/list}">Listar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/ppostulante/reporte}">Reporte</a></li>
+
+
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd">Contrato</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a
+									sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_EMPLEADOR')"
+									class="dropdown-item" th:href="@{/ccontrato/new}">Registrar</a></li>
+								<li><a
+									sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR') or hasRole('ROLE_EMPLEADOR')"
+									class="dropdown-item" th:href="@{/ccontrato/list}">Listar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/ccontrato/reporte}">Reporte</a></li>
+							</ul></li>
+
+						<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false"
+							style="color: #fdfdfd"> Comentario</a>
+							<ul class="dropdown-menu"
+								aria-labelledby="navbarDropdownMenuLink">
+								<li><a
+									sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR')"
+									class="dropdown-item" th:href="@{/ccomentario/new}">Registrar</a></li>
+								<li><a class="dropdown-item" th:href="@{/ccomentario/list}">Listar</a></li>
+								<li><a class="dropdown-item"
+									th:href="@{/ccomentario/reporte}">Reporte</a></li>
+
+							</ul></li>
+
+						<li>
+							<form class="form-inline" style="width: 100px; height: 40px"
+								id="logoutForm" th:action="@{/logout}" method="post">
+								<button class="btn btn-sm btn-danger"
+									onclick="document.getElementById('logoutForm').submit();"
+									type="submit">Cerrar Sesión</button>
+							</form>
+						</li>
+
+					</ul>
+				</div>
+			</div>
+
+		</nav>
+
+	</header>
+	<div class="container py4"></div>
+	<footer th:fragment="footer" class="container">
+		<p>EasyChamba</p>
+	</footer>
+
+</body>
+</html>

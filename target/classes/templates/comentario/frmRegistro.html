@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+#selector {
+	color: goldenrod;
+}
+</style>
+<body>
+
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', sans-serif; font-size: 150%;">Escribir
+			 comentario</div>
+		<hr style="background-color: #FA251B" />
+		<div>
+			<form th:action="@{/ccomentario/save}" method="post" th:object="${c}">
+
+
+				<div class="col-sm-12">
+					<label class="form-label">Contrato:</label> <select
+						name="selectTipoTrabajo" class="form-control"
+						th:field="*{contrato.idContrato}">
+
+						<option th:each="p:${listaContrato}" th:value="${p.idContrato}"
+							th:text="${p.idContrato}"
+							th:selected="(${p.idContrato}==*{contrato.idContrato})"></option>
+
+					</select>
+
+				</div>
+
+				<div class="col-sm-12">
+					<label class="form-label">Empleador:</label> <select
+						name="selectTipoTrabajo" class="form-control"
+						th:field="*{empleador.idEmpleador}">
+
+						<option th:each="p:${listaEmpleador}" th:value="${p.idEmpleador}"
+							th:text="${p.person.dniPerson}"
+							th:selected="(${p.idEmpleador}==*{empleador.idEmpleador})"></option>
+
+					</select>
+
+				</div>
+
+
+				<div>
+					<label class="form-label">Comentario:</label> <select
+						name="selectType" class="form-control" th:field="*{addComentario}">
+						<option value="Recomendado">Recomendado</option>
+						<option value="No recomendado">No recomendado</option>
+					</select>
+				</div>
+
+				<div>
+					<label class="form-label">Calificación:</label> <select
+						name="selectType" class="form-control"
+						th:field="*{addCalificacion}" id="selector">
+						<option value="✰✰✰✰✰">✰✰✰✰✰</option>
+						<option value="✰✰✰✰">✰✰✰✰</option>
+						<option value="✰✰✰">✰✰✰</option>
+						<option value="✰✰">✰✰</option>
+						<option value="✰">✰</option>
+
+					</select>
+				</div>
+
+				<div class="col-sm-12">
+					<input type="submit" value="Enviar" class="btn btn-dark"></input>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

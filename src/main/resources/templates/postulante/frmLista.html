@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', sans-serif; font-size: 150%;">Lista
+			de postulantes</div>
+		<hr style="background-color: #FA251B" />
+		<div>
+			<div class="table-responsive">
+				<table class="table table-white">
+					<thead>
+						<tr>
+
+							<th>ID</th>
+							<th>ID Aviso trabajo</th>
+							<th>Aviso trabajo</th>
+							<th>DNI Trabajador</th>
+							<th>Nombre Trabajador</th>
+							<th
+								sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR')">Operación</th>
+							<th
+								sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR')">Operación</th>
+
+
+
+						</tr>
+					</thead>
+					<tbody id="postulantes-list">
+						<tr th:each="pos:${listaPostulante}">
+							<td th:text="${pos.idPostulante}"></td>
+							<td th:text="${pos.avisoTrabajo.idAvisoTrabajo}"></td>
+							<td th:text="${pos.avisoTrabajo.tipoTrabajo.rubro}"></td>
+							<td th:text="${pos.trabajador.person.dniPerson}"></td>
+							<td th:text="${pos.trabajador.person.namePerson}"></td>
+
+							<td><a
+								sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR')"
+								th:href="@{'/ppostulante/goupdate/'+${pos.idPostulante}}">
+									Actualizar </a></td>
+
+							<td><a
+								sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_TRABAJADOR')"
+								th:href="@{/ppostulante/delete?id=}+${pos.idPostulante}">
+									Eliminar </a></td>
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

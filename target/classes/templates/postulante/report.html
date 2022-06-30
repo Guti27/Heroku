@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="master/master :: head">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<header th:replace="master/master :: header"></header>
+	<div class="container">
+		<hr style="background-color: #fdfdfd" />
+		<div
+			style="font-family: 'Roboto Condensed', sans-serif; font-size: 150%;">Cantidad
+			de postulantes a un aviso de trabajo</div>
+		<hr style="background-color: #FA251B" />
+		<div>
+			<div class="table-responsive">
+				<table class="table table-white">
+					<thead>
+						<tr>
+
+							<th scope="col">ID Aviso trabajo</th>
+							<th scope="col">Rubro</th>
+							<th scope="col">Cantidad de postulantes</th>
+						</tr>
+					</thead>
+					<tbody id="postulanteTrabajo-list">
+						<tr th:each="tra:${listaPostulacionesTrabajo}">
+							<td th:text="${tra[0]}"></td>
+							<td th:text="${tra[1]}"></td>
+							<td th:text="${tra[2]}"></td>
+
+
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="js">
+				<div>
+					<canvas id="myChart"></canvas>
+				</div>
+				<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+				<script th:inline="javascript">
+						/*<![CDATA[*/
+						
+						    var arr = /*[[${listaPostulacionesTrabajo}]]*/ '';
+						    let labels = [];
+						    let values = [];
+						   
+						    arr.forEach(
+								el => { labels.push(el[1]); values.push(+el[2]); }
+									   );
+							 console.log(labels, values);						
+						/*]]>*/
+
+						
+						  const data = {
+							label: 'cantidad postulaciones a aviso de trabajo',
+						    labels: labels,
+						    datasets: [{
+						      backgroundColor:  [
+						    	  'rgb(255,99,71)',
+                                  'rgb(218,165,32)',
+                                  'rgb(0,255,0)',
+                                  'rgb(102,205,170)',
+                                  'rgb(60,179,113)',
+                                  'rgb(32,178,170)'
+						        ],
+						      borderColor:  [
+						    	  'rgb(255,99,71)',
+                                  'rgb(218,165,32)',
+                                  'rgb(0,255,0)',
+                                  'rgb(102,205,170)',
+                                  'rgb(60,179,113)',
+                                  'rgb(32,178,170)'
+						        ],
+						      data: values,
+						    }]
+						  };
+						
+						  const config = {
+						    type: 'doughnut',
+						    data: data,
+						    options: {}
+						  };
+
+						  const myChart = new Chart(
+								    document.getElementById('myChart'),
+								    config
+								  );
+						</script>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
